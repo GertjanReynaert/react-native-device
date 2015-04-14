@@ -37,7 +37,7 @@ Usage example
 'use strict';
 
 var React = require('react-native');
-var Device = require('Device');
+var Device = require('react-native-device');
 var {
   AppRegistry
 } = React;
