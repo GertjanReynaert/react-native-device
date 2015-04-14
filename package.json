@@ -1,6 +1,6 @@
 {
   "name": "react-native-device",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Device detection for React Native",
   "main": "Device.js",
   "scripts": {
