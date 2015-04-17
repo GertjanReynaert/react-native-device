@@ -11,8 +11,9 @@
     "url": "https://github.com/GertjanReynaert/react-native-device"
   },
   "keywords": [
+    "react-component",
     "react-native",
-    "iOS",
+    "ios",
     "device",
     "detection"
   ],
