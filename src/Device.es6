@@ -1,12 +1,6 @@
 import Dimensions from 'Dimensions';
 
 class Device {
-  constructor() {
-    this.width = this._width();
-    this.height = this._height();
-    this.kind = this._kind();
-  }
-
   isIpad() {
     return this.kind.indexOf("iPad") === 0;
   }
@@ -15,7 +9,7 @@ class Device {
     return this.kind.indexOf("iPhone") === 0;
   }
 
-  _kind() {
+  get kind() {
     const iPad = [768, 1024];
     const iPhone4 = [320, 480];
     const iPhone5 = [320, 568];
@@ -43,11 +37,11 @@ class Device {
     }
   }
 
-  _width() {
+  get width() {
     return Dimensions.get("window").width;
   }
 
-  _height() {
+  get height() {
     return Dimensions.get("window").height;
   }
 }

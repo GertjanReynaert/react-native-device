@@ -56,17 +56,13 @@
 	  value: true
 	});
 
-	var _Dimensions = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"Dimensions\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _Dimensions = __webpack_require__(1);
 
 	var _Dimensions2 = _interopRequireWildcard(_Dimensions);
 
 	var Device = (function () {
 	  function Device() {
 	    _classCallCheck(this, Device);
-
-	    this.width = this._width();
-	    this.height = this._height();
-	    this.kind = this._kind();
 	  }
 
 	  _createClass(Device, [{
@@ -80,8 +76,8 @@
 	      return this.kind.indexOf("iPhone") === 0;
 	    }
 	  }, {
-	    key: "_kind",
-	    value: function _kind() {
+	    key: "kind",
+	    get: function () {
 	      var iPad = [768, 1024];
 	      var iPhone4 = [320, 480];
 	      var iPhone5 = [320, 568];
@@ -109,13 +105,13 @@
 	      }
 	    }
 	  }, {
-	    key: "_width",
-	    value: function _width() {
+	    key: "width",
+	    get: function () {
 	      return _Dimensions2["default"].get("window").width;
 	    }
 	  }, {
-	    key: "_height",
-	    value: function _height() {
+	    key: "height",
+	    get: function () {
 	      return _Dimensions2["default"].get("window").height;
 	    }
 	  }]);
@@ -125,6 +121,12 @@
 
 	var device = new Device();
 	exports.device = device;
+
+/***/ },
+/* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = Dimensions;
 
 /***/ }
 /******/ ]);
