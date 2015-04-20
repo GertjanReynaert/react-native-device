@@ -2,7 +2,7 @@
   "name": "react-native-device",
   "version": "0.2.0",
   "description": "Device detection for React Native",
-  "main": "Device.js",
+  "main": "output/Device.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,5 +21,10 @@
     "react-native": "^0.4.0"
   },
   "author": "Gertjan Reynaert",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^5.1.11",
+    "babel-loader": "^5.0.0",
+    "webpack": "^1.8.5"
+  }
 }

@@ -1,4 +1,4 @@
-var Dimensions = require('Dimensions');
+import Dimensions from 'Dimensions';
 
 class Device {
   constructor() {
@@ -16,11 +16,11 @@ class Device {
   }
 
   _kind() {
-    var iPad = [768, 1024];
-    var iPhone4 = [320, 480];
-    var iPhone5 = [320, 568];
-    var iPhone6 = [375, 667];
-    var iPhone6plus = [414, 736];
+    const iPad = [768, 1024];
+    const iPhone4 = [320, 480];
+    const iPhone5 = [320, 568];
+    const iPhone6 = [375, 667];
+    const iPhone6plus = [414, 736];
 
     if (iPad.indexOf(this.width) > -1 && iPad.indexOf(this.height) > -1) {
       return "iPad";
@@ -52,4 +52,4 @@ class Device {
   }
 }
 
-module.exports = new Device();
+export var device = new Device();
