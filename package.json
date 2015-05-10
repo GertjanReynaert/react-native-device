@@ -2,7 +2,7 @@
   "name": "react-native-device",
   "version": "0.2.0",
   "description": "Device detection for React Native",
-  "main": "output/Device.js",
+  "main": "./output/Device.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
