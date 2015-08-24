@@ -8,9 +8,15 @@ A wrapper for the native [UIDevice](https://developer.apple.com/library/ios/docu
 
 ## Installation
 
+First install the package to your project from NPM...
+
 ```
 npm install react-native-device --save
 ```
+
+Then within the package folder just add both the `.h` and `.m` classes to your project...
+
+<img src="http://i.imgur.com/GZeVPPd.png" width="400">
 
 ## Methods
 
