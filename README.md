@@ -2,10 +2,6 @@
 
 A wrapper for the native [UIDevice](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIDevice_Class/index.html#//apple_ref/occ/cl/UIDevice) class allowing you to access device properties and screen dimensions.
 
-<img src="http://i.imgur.com/gg5A5MF.png?1" width="400">
-
-**Note the preview was taken in the simulator, hence the lack of device name**
-
 ## Installation
 
 First install the package to your project from NPM...
