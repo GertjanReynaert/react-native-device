@@ -1,46 +1,65 @@
-Device detection for react-native
-=================================
+# UIDevice Wrapper for React Native
 
-Detect device type and screen size.
+A wrapper for the native [UIDevice](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIDevice_Class/index.html#//apple_ref/occ/cl/UIDevice) class allowing you to access device properties and screen dimensions.
 
-Installation
-------------
+## Installation
+
+First install the package to your project from NPM...
 
 ```
 npm install react-native-device --save
 ```
 
-API
----
+Then within the package folder just add both the `.h` and `.m` classes to your project...
 
-- isIpad
-  - boolean
+<img src="http://i.imgur.com/GZeVPPd.png" width="400">
 
-- isIphone
-  - boolean
+## Methods
 
-- kind
-  - "iPad"
-  - "iPhone4"
-  - "iPhone5"
-  - "iPhone6"
-  - "iPhone6plus"
+```javascript
+Device.isIpad()
+```
 
-- width
+The device model is of type iPad
 
-- height
+```javascript
+Device.isIphone()
+```
 
-Usage example
--------------
+The device model is of type iPhone
+
+## Properties
+
+```javascript
+Device.model
+```
+
+The device model, such as `iPhone 5` or `iPad Air` - [All model options](https://github.com/InderKumarRathore/DeviceUtil/blob/master/DeviceUtil.m)
+
+```javascript
+Device.deviceName
+```
+
+The device name, such as `John Smith's iPhone`
+
+```javascript
+Device.systemName
+```
+
+The device OS name, such as `iPhone OS`
+
+```javascript
+Device.systemVersion
+```
+
+The device OS version, such as `8.4`
+
+## Example
 
 ```
 'use strict';
 
-var React = require('react-native');
 var Device = require('react-native-device');
-var {
-  AppRegistry
-} = React;
 
 var ExampleApp = React.createClass({
   render: function() {
@@ -51,6 +70,4 @@ var ExampleApp = React.createClass({
     }
   }
 });
-
-AppRegistry.registerComponent('ExampleApp', () => ExampleApp);
 ```
