@@ -1,6 +1,6 @@
 {
   "name": "react-native-device",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "description": "UIDevice wrapper for React Native",
   "main": "Device.js",
   "scripts": {
@@ -16,7 +16,9 @@
     "ios",
     "device",
     "detection",
-    "UIDevice"
+    "UIDevice",
+    "model",
+    "name"
   ],
   "author": "Gertjan Reynaert",
   "license": "MIT"
