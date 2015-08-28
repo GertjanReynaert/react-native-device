@@ -13,7 +13,7 @@ RCT_EXPORT_MODULE();
     NSString *name = [[UIDevice currentDevice] name];
     NSString *systemName = [[UIDevice currentDevice] systemName];
     NSString *systemVersion = [[UIDevice currentDevice] systemVersion];
-    
+
     return @{
              @"model" : (model),
              @"name" : (name),

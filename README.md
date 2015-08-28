@@ -1,4 +1,4 @@
-# UIDevice Wrapper for React Native
+# React Native Device
 
 A wrapper for the native [UIDevice](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIDevice_Class/index.html#//apple_ref/occ/cl/UIDevice) class allowing you to access device properties and screen dimensions.
 
@@ -56,7 +56,7 @@ The device OS version, such as `8.4`
 
 ## Example
 
-```
+```javascript
 'use strict';
 
 var Device = require('react-native-device');
