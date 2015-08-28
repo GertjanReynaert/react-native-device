@@ -4,7 +4,6 @@ var DeviceUtil = NativeModules.DeviceUtil;
 var Dimensions = require('Dimensions');
 
 class Device {
-
   constructor() {
     this.width = Dimensions.get('window').width;
     this.height = Dimensions.get('window').height;
@@ -21,7 +20,6 @@ class Device {
   isIphone() {
     return this.model.indexOf('iPhone') >= 0;
   }
-
 }
 
 module.exports = new Device();
