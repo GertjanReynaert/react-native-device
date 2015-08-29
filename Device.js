@@ -14,7 +14,8 @@ class Device {
     this.userInterfaceIdiom = DeviceUtil.userInterfaceIdiom;
     this.identifierForVendor = DeviceUtil.identifierForVendor;
     this.orientation = DeviceUtil.orientation;
-    this.generatesDeviceOrientationNotifications = DeviceUtil.generatesDeviceOrientationNotifications;
+    this.generatesDeviceOrientationNotifications =
+      DeviceUtil.generatesDeviceOrientationNotifications;
     this.batteryLevel = DeviceUtil.batteryLevel;
     this.batteryMonitoringEnabled = DeviceUtil.batteryMonitoringEnabled;
     this.batteryState = DeviceUtil.batteryState;
