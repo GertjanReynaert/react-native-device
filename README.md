@@ -61,7 +61,7 @@ Device.model
 The device model, such as `iPhone 5` or `iPad Air` - [All model options](https://github.com/InderKumarRathore/DeviceUtil/blob/master/DeviceUtil.m)
 
 ```javascript
-    Device.localizedModel
+Device.localizedModel
 ```
 
 Localized verion of `Device.model`
@@ -85,13 +85,13 @@ Device.systemVersion
 The device OS version, such as `8.4`
 
 ```javascript
-    Device.multitaskingSupported
+Device.multitaskingSupported
 ```
 
 Whether the device supports multitasking or not
 
 ```javascript
-    Device.userInterfaceIdiom
+Device.userInterfaceIdiom
 ```
 
 What type of device it is. Possible values:
@@ -101,13 +101,13 @@ What type of device it is. Possible values:
 - Unknown
 
 ```javascript
-    Device.identifierForVendor
+Device.identifierForVendor
 ```
 
 Device unique id (UUID)
 
 ```javascript
-    Device.orientation
+Device.orientation
 ```
 
 What is the orientation of the device. Possible values:
@@ -121,25 +121,25 @@ What is the orientation of the device. Possible values:
 - Unknown
 
 ```javascript
-    Device.generatesDeviceOrientationNotifications
+Device.generatesDeviceOrientationNotifications
 ```
 
 Whether the device can change orientation or not. (Orientation lock)
 
 ```javascript
-    Device.batteryLevel
+Device.batteryLevel
 ```
 
 Level of the battery. Values between 0.0 and 1.0, if unknown -1.0
 
 ```javascript
-    Device.batteryMonitoringEnabled
+Device.batteryMonitoringEnabled
 ```
 
 Whether the device has battery detection enabled or not
 
 ```javascript
-    Device.batteryState
+Device.batteryState
 ```
 
 State of the battery. Possible values:
@@ -150,13 +150,13 @@ State of the battery. Possible values:
 - Unknown
 
 ```javascript
-    Device.proximityMonitoringEnabled
+Device.proximityMonitoringEnabled
 ```
 
 Whether the device has proximity detection enabled or not
 
 ```javascript
-    Device.proximityState
+Device.proximityState
 ```
 
 Whether the device is close to the user (true) or not (false)
