@@ -64,6 +64,16 @@ RCT_EXPORT_MODULE();
   }
 }
 
+RCT_EXPORT_METHOD(getBatteryLevel: (RCTResponseSenderBlock)callback) {
+  UIDevice *device = [UIDevice currentDevice];
+
+  callback(@[[NSNumber numberWithFloat:device.batteryLevel]]);
+}
+
+RCT_EXPORT_METHOD(getBatteryState: (RCTResponseSenderBlock)callback) {
+  callback(@[self.batteryState]);
+}
+
 - (NSString *)batteryState {
   UIDevice *device = [UIDevice currentDevice];
 
@@ -84,6 +94,10 @@ RCT_EXPORT_MODULE();
       return @"Unknown";
       break;
   }
+}
+
+RCT_EXPORT_METHOD(getOrientation: (RCTResponseSenderBlock)callback) {
+  callback(@[self.orientation]);
 }
 
 - (NSString *)orientation {
@@ -120,5 +134,10 @@ RCT_EXPORT_MODULE();
   }
 }
 
-@end
+RCT_EXPORT_METHOD(getProximityState: (RCTResponseSenderBlock)callback) {
+  UIDevice *device = [UIDevice currentDevice];
 
+  callback(@[[NSNumber numberWithBool:device.proximityState]]);
+}
+
+@end

@@ -3,6 +3,7 @@ var DeviceUtil = NativeModules.DeviceUtil;
 
 class Device {
   constructor() {
+    //constants
     this.width = Dimensions.get('window').width;
     this.height = Dimensions.get('window').height;
     this.model = DeviceUtil.model;
@@ -13,14 +14,15 @@ class Device {
     this.localizedModel = DeviceUtil.localizedModel;
     this.userInterfaceIdiom = DeviceUtil.userInterfaceIdiom;
     this.identifierForVendor = DeviceUtil.identifierForVendor;
+
     this.orientation = DeviceUtil.orientation;
-    this.generatesDeviceOrientationNotifications =
-      DeviceUtil.generatesDeviceOrientationNotifications;
-    this.batteryLevel = DeviceUtil.batteryLevel;
-    this.batteryMonitoringEnabled = DeviceUtil.batteryMonitoringEnabled;
     this.batteryState = DeviceUtil.batteryState;
-    this.proximityMonitoringEnabled = DeviceUtil.proximityMonitoringEnabled;
+    this.batteryLevel = DeviceUtil.batteryLevel;
     this.proximityState = DeviceUtil.proximityState;
+
+    this.batteryMonitoringEnabled = DeviceUtil.batteryMonitoringEnabled;
+    this.proximityMonitoringEnabled = DeviceUtil.proximityMonitoringEnabled;
+    this.generatesDeviceOrientationNotifications = DeviceUtil.generatesDeviceOrientationNotifications;
   }
 
   isIpad() {
@@ -29,6 +31,22 @@ class Device {
 
   isIphone() {
     return this.userInterfaceIdiom === 'Phone';
+  }
+
+  getOrientation(callback) {
+    DeviceUtil.getOrientation(callback);
+  }
+
+  getBatteryState(callback) {
+    DeviceUtil.getBatteryState(callback);
+  }
+
+  getBatteryLevel(callback) {
+    DeviceUtil.getBatteryLevel(callback);
+  }
+
+  getProximityState(callback) {
+    DeviceUtil.getProximityState(callback);
   }
 }
 
