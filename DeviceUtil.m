@@ -19,30 +19,34 @@ RCT_EXPORT_MODULE();
     bool multitaskingSupported = device.multitaskingSupported;
     NSString *userInterfaceIdiom = self.userInterfaceIdiom;
     NSString *identifierForVendor = device.identifierForVendor.UUIDString;
-    NSString *orientation = self.orientation;
+
+    NSString *initialOrientation = self.orientation;
+    float initialBatteryLevel = device.batteryLevel;
+    NSString *initialBatteryState = self.batteryState;
+    bool initialProximityState = device.proximityState;
+
     bool generatesDeviceOrientationNotifications = device.generatesDeviceOrientationNotifications;
-    float batteryLevel = device.batteryLevel;
     bool batteryMonitoringEnabled = device.batteryMonitoringEnabled;
-    NSString *batteryState = self.batteryState;
     bool proximityMonitoringEnabled = device.proximityMonitoringEnabled;
-    bool proximityState = device.proximityState;
 
     return @{
              @"model" : (model),
              @"name" : (name),
              @"systemName" : (systemName),
              @"systemVersion" : (systemVersion),
-             @"multitaskingSupported" : ([NSNumber numberWithBool:multitaskingSupported]),
              @"localizedModel" : (localizedModel),
+             @"multitaskingSupported" : ([NSNumber numberWithBool:multitaskingSupported]),
              @"userInterfaceIdiom" : (userInterfaceIdiom),
              @"identifierForVendor" : (identifierForVendor),
-             @"orientation" : (orientation),
+
+             @"initialOrientation" : (initialOrientation),
+             @"initialBatteryLevel" : ([NSNumber numberWithFloat:initialBatteryLevel]),
+             @"initialBatteryState" : (initialBatteryState),
+             @"initialProximityState" : ([NSNumber numberWithBool:initialProximityState]),
+
              @"generatesDeviceOrientationNotifications" : ([NSNumber numberWithBool:generatesDeviceOrientationNotifications]),
-             @"batteryLevel" : ([NSNumber numberWithFloat:batteryLevel]),
              @"batteryMonitoringEnabled" : ([NSNumber numberWithBool:batteryMonitoringEnabled]),
-             @"batteryState" : (batteryState),
              @"proximityMonitoringEnabled" : ([NSNumber numberWithBool:proximityMonitoringEnabled]),
-             @"proximityState" : ([NSNumber numberWithBool:proximityState]),
     };
 }
 

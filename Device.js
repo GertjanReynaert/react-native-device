@@ -15,10 +15,10 @@ class Device {
     this.userInterfaceIdiom = DeviceUtil.userInterfaceIdiom;
     this.identifierForVendor = DeviceUtil.identifierForVendor;
 
-    this.orientation = DeviceUtil.orientation;
-    this.batteryState = DeviceUtil.batteryState;
-    this.batteryLevel = DeviceUtil.batteryLevel;
-    this.proximityState = DeviceUtil.proximityState;
+    this.initialOrientation = DeviceUtil.initialOrientation;
+    this.initialBatteryState = DeviceUtil.initialBatteryState;
+    this.initialBatteryLevel = DeviceUtil.initialBatteryLevel;
+    this.initialProximityState = DeviceUtil.initialProximityState;
 
     this.batteryMonitoringEnabled = DeviceUtil.batteryMonitoringEnabled;
     this.proximityMonitoringEnabled = DeviceUtil.proximityMonitoringEnabled;
