@@ -162,7 +162,10 @@ RCT_EXPORT_METHOD(watchOrientationChange: (RCTResponseSenderBlock)callback) {
   UIDevice *device = [UIDevice currentDevice];
   device.beginGeneratingDeviceOrientationNotifications;
 
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:device];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(orientationChanged:)
+                                               name:UIDeviceOrientationDidChangeNotification
+                                             object:nil];
 }
 
 - (void)orientationChanged:(NSNotification *)notification
