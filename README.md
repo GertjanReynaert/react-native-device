@@ -110,10 +110,11 @@ What type of device it is. Possible values:
 #### Orientation
 
 ```javascript
-Device.orientation
+Device.initialOrientation
 ```
 
-What is the orientation of the device. Possible values:
+Orientation of the device when the app is just started.
+Possible values:
 
 - FaceDown
 - FaceUp
@@ -132,38 +133,40 @@ Whether the device can change orientation or not. (Orientation lock)
 #### Battery
 
 ```javascript
-Device.batteryLevel
+Device.initialBatteryLevel
 ```
 
-Level of the battery. Values between 0.0 and 1.0, if unknown -1.0
+Level of the battery when the app is just started.
+Values between 0.0 and 1.0, if unknown -1.0
 
 ```javascript
-Device.batteryMonitoringEnabled
+Device.initialBatteryState
 ```
 
-Whether the device has battery detection enabled or not
-
-```javascript
-Device.batteryState
-```
-
-State of the battery. Possible values:
+State of the battery when the app just started.
+Possible values:
 
 - Charging
 - Full
 - Unplugged
 - Unknown
 
+```javascript
+Device.batteryMonitoringEnabled
+```
+
+Whether the app is monitoring the battery or not.
+
 #### Proximity
+
+```javascript
+Device.initialProximityState
+```
+
+Whether the device is close to the user (true) or not (false)
 
 ```javascript
 Device.proximityMonitoringEnabled
 ```
 
-Whether the device has proximity detection enabled or not
-
-```javascript
-Device.proximityState
-```
-
-Whether the device is close to the user (true) or not (false)
+Whether the app is monitoring the proximity or not
