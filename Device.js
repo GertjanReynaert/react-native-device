@@ -3,7 +3,6 @@ var DeviceUtil = NativeModules.DeviceUtil;
 
 class Device {
   constructor() {
-    //constants
     this.width = Dimensions.get('window').width;
     this.height = Dimensions.get('window').height;
     this.model = DeviceUtil.model;
@@ -59,6 +58,18 @@ class Device {
 
   watchProximityChange(callback) {
     DeviceUtil.watchProximityChange(callback);
+  }
+
+  stopWatchingOrientationChange(callback) {
+    DeviceUtil.stopWatchingOrientationChange(callback);
+  }
+
+  stopWatchingBatteryChange(callback) {
+    DeviceUtil.stopWatchingBatteryChange(callback);
+  }
+
+  stopWatchingProximityChange(callback) {
+    DeviceUtil.stopWatchingChange(callback);
   }
 }
 

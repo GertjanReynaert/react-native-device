@@ -156,16 +156,13 @@ RCTResponseSenderBlock orientationChangedCallback;
 RCTResponseSenderBlock batteryChangedCallback;
 RCTResponseSenderBlock proximityChangedCallback;
 
+//OrientationChange
 RCT_EXPORT_METHOD(watchOrientationChange: (RCTResponseSenderBlock)callback) {
   orientationChangedCallback = callback;
 
-  UIDevice *device = [UIDevice currentDevice];
-  device.beginGeneratingDeviceOrientationNotifications;
+  [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 
-  [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(orientationChanged:)
-                                               name:UIDeviceOrientationDidChangeNotification
-                                             object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 - (void)orientationChanged:(NSNotification *)notification
@@ -173,6 +170,11 @@ RCT_EXPORT_METHOD(watchOrientationChange: (RCTResponseSenderBlock)callback) {
   orientationChangedCallback(@[self.orientation]);
 }
 
+RCT_EXPORT_METHOD(stopWatchingOrientationChange) {
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+}
+
+//BatterChange
 RCT_EXPORT_METHOD(watchBatteryChange: (RCTResponseSenderBlock)callback) {
   batteryChangedCallback = callback;
 
@@ -188,6 +190,12 @@ RCT_EXPORT_METHOD(watchBatteryChange: (RCTResponseSenderBlock)callback) {
   batteryChangedCallback(@[[NSNumber numberWithFloat:self.batteryLevel], self.batteryState]);
 }
 
+RCT_EXPORT_METHOD(stopWatchingBatteryChange) {
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceBatteryLevelDidChangeNotification object:nil];
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceBatteryStateDidChangeNotification object:nil];
+}
+
+//ProximityChange
 RCT_EXPORT_METHOD(watchProximityChange: (RCTResponseSenderBlock)callback) {
   proximityChangedCallback = callback;
 
@@ -200,6 +208,10 @@ RCT_EXPORT_METHOD(watchProximityChange: (RCTResponseSenderBlock)callback) {
 - (void)proximityChanged:(NSNotification *)notification
 {
   proximityChangedCallback(@[[NSNumber numberWithBool: self.proximityState]]);
+}
+
+RCT_EXPORT_METHOD(stopWatchingProximityChange) {
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceProximityStateDidChangeNotification object:nil];
 }
 
 @end
