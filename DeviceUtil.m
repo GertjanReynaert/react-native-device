@@ -1,7 +1,8 @@
 #import "DeviceUtil.h"
 #import "RCTBridge.h"
-#import "RCTUtils.h"
 #import "RCTEventDispatcher.h"
+#import "RCTUtils.h"
+#import "RCTConvert.h"
 
 @implementation DeviceUtil
 
@@ -153,6 +154,8 @@ RCT_EXPORT_METHOD(getProximityState: (RCTResponseSenderBlock)callback) {
   return device.proximityState;
 }
 
+// Set event listeners in constructor
+
 - (void)orientationChanged:(NSNotification *)notification
 {
   [self.bridge.eventDispatcher sendAppEventWithName:@"orientationChanged"
@@ -171,5 +174,17 @@ RCT_EXPORT_METHOD(getProximityState: (RCTResponseSenderBlock)callback) {
 {
   [self.bridge.eventDispatcher sendAppEventWithName:@"proximityStateChanged"
                                                body:@{@"proximityState": [NSNumber numberWithBool: self.proximityState]}];
+}
+
+RCT_EXPORT_METHOD(setup) {
+  UIDevice *device = [UIDevice currentDevice];
+  device.batteryMonitoringEnabled = YES;
+  device.proximityMonitoringEnabled = YES;
+  [device beginGeneratingDeviceOrientationNotifications];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(batteryChanged:) name:UIDeviceBatteryLevelDidChangeNotification object:device];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(batteryChanged:) name:UIDeviceBatteryStateDidChangeNotification object:device];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(proximityChanged:) name:UIDeviceProximityStateDidChangeNotification object:device];
 }
 @end
