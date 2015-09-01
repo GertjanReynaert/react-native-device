@@ -81,15 +81,15 @@ class Device {
     this._orientationSubscription.remove();
   }
 
-  stopWatchingBatteryStateChange(callback) {
+  stopWatchingBatteryStateChange() {
     this._batteryStateSubscription.remove();
   }
 
-  stopWatchingBatteryLevelChange(callback) {
+  stopWatchingBatteryLevelChange() {
     this._batteryLevelSubscription.remove();
   }
 
-  stopWatchingProximityChange(callback) {
+  stopWatchingProximityChange() {
     this._proximityStateSubscription.remove();
   }
 }
