@@ -4,31 +4,6 @@
 #import "RCTUtils.h"
 #import "RCTConvert.h"
 
-@implementation RCTConvert (DeviceUtil)
-RCT_ENUM_CONVERTER(UIDeviceOrientation, (@{
-                                           @"FaceDown": @(UIDeviceOrientationFaceDown),
-                                           @"FaceUp": @(UIDeviceOrientationFaceUp),
-                                           @"LandscapeLeft": @(UIDeviceOrientationLandscapeLeft),
-                                           @"LandscapeRight": @(UIDeviceOrientationLandscapeRight),
-                                           @"Portrait": @(UIDeviceOrientationPortrait),
-                                           @"PortraitUpsideDown": @(UIDeviceOrientationPortraitUpsideDown),
-                                           @"Unknown": @(UIDeviceOrientationUnknown),
-                                           }), UIDeviceOrientationUnknown, integerValue);
-
-RCT_ENUM_CONVERTER(UIDeviceBatteryState, (@{
-                                            @"Charging": @(UIDeviceBatteryStateCharging),
-                                            @"Full": @(UIDeviceBatteryStateFull),
-                                            @"Unplugged": @(UIDeviceBatteryStateUnplugged),
-                                            @"Unknown": @(UIDeviceBatteryStateUnknown),
-                                            }), UIDeviceBatteryStateUnknown, integerValue)
-
-RCT_ENUM_CONVERTER(UIUserInterfaceIdiom, (@{
-                                            @"Pad": @(UIUserInterfaceIdiomPad),
-                                            @"Phone": @(UIUserInterfaceIdiomPhone),
-                                            @"Unspecified": @(UIUserInterfaceIdiomUnspecified),
-                                            }), UIUserInterfaceIdiomUnspecified, integerValue);
-@end
-
 @implementation DeviceUtil
 
 RCT_EXPORT_MODULE();
@@ -67,12 +42,12 @@ RCT_EXPORT_MODULE();
            @"systemVersion" : (device.systemVersion),
            @"localizedModel" : (device.localizedModel),
            @"multitaskingSupported" : ([NSNumber numberWithBool:device.multitaskingSupported]),
-           @"userInterfaceIdiom" : @(device.userInterfaceIdiom),
+           @"userInterfaceIdiom" : self.userInterfaceIdiom,
            @"identifierForVendor" : (device.identifierForVendor.UUIDString),
 
-           @"initialOrientation" : @(device.orientation),
+           @"initialOrientation" : self.orientation,
            @"initialBatteryLevel" : ([NSNumber numberWithFloat:device.batteryLevel]),
-           @"initialBatteryState" : @(device.batteryState),
+           @"initialBatteryState" : self.batteryState,
            @"initialProximityState" : ([NSNumber numberWithBool:device.proximityState]),
 
            @"generatesDeviceOrientationNotifications" : ([NSNumber numberWithBool:device.generatesDeviceOrientationNotifications]),
@@ -89,13 +64,11 @@ RCT_EXPORT_METHOD(getBatteryLevel: (RCTResponseSenderBlock)callback) {
 }
 
 RCT_EXPORT_METHOD(getBatteryState: (RCTResponseSenderBlock)callback) {
-  UIDevice *device = [UIDevice currentDevice];
-  callback(@[@(device.batteryState)]);
+  callback(@[self.batteryState]);
 }
 
 RCT_EXPORT_METHOD(getOrientation: (RCTResponseSenderBlock)callback) {
-  UIDevice *device = [UIDevice currentDevice];
-  callback(@[@(device.orientation)]);
+  callback(@[self.orientation]);
 }
 
 RCT_EXPORT_METHOD(getProximityState: (RCTResponseSenderBlock)callback) {
@@ -107,9 +80,8 @@ RCT_EXPORT_METHOD(getProximityState: (RCTResponseSenderBlock)callback) {
 
 - (void)orientationChanged:(NSNotification *)notification
 {
-  UIDevice *device = [UIDevice currentDevice];
   [self.bridge.eventDispatcher sendAppEventWithName:@"orientationChanged"
-                                               body:@{@"orientation": @(device.orientation)}];
+                                               body:@{@"orientation": self.orientation}];
 }
 
 - (void)batteryLevelChanged:(NSNotification *)notification
@@ -121,9 +93,8 @@ RCT_EXPORT_METHOD(getProximityState: (RCTResponseSenderBlock)callback) {
 
 - (void)batteryStateChanged:(NSNotification *)notification
 {
-  UIDevice *device = [UIDevice currentDevice];
   [self.bridge.eventDispatcher sendAppEventWithName:@"batteryStateChanged"
-                                               body:@{@"batteryState": @(device.batteryState)}];
+                                               body:@{@"batteryState": self.batteryState}];
 }
 
 - (void)proximityChanged:(NSNotification *)notification
@@ -132,4 +103,36 @@ RCT_EXPORT_METHOD(getProximityState: (RCTResponseSenderBlock)callback) {
   [self.bridge.eventDispatcher sendAppEventWithName:@"proximityStateChanged"
                                                body:@{@"proximityState": [NSNumber numberWithBool: device.proximityState]}];
 }
+
+// enum mappings
+
+- (NSString *)orientation {
+  switch ([[UIDevice currentDevice] orientation]) {
+    case UIDeviceOrientationFaceDown: return @"FaceDown"; break;
+    case UIDeviceOrientationFaceUp: return @"FaceUp"; break;
+    case UIDeviceOrientationLandscapeLeft: return @"LandscapeLeft"; break;
+    case UIDeviceOrientationLandscapeRight: return @"LandscapeRight"; break;
+    case UIDeviceOrientationPortraitUpsideDown: return @"UpsideDown"; break;
+    case UIDeviceOrientationPortrait: return @"Portrait"; break;
+    default: return @"Unknown"; break;
+  }
+}
+
+- (NSString *)batteryState {
+  switch ([[UIDevice currentDevice] batteryState]) {
+    case UIDeviceBatteryStateFull: return @"Full"; break;
+    case UIDeviceBatteryStateCharging: return @"charging"; break;
+    case UIDeviceBatteryStateUnplugged: return @"Unplugged"; break;
+    default: return @"Unknown"; break;
+  }
+}
+
+- (NSString *)userInterfaceIdiom {
+  switch ([[UIDevice currentDevice] userInterfaceIdiom]) {
+    case UIUserInterfaceIdiomPad: return @"Pad"; break;
+    case UIUserInterfaceIdiomPhone: return @"Phone"; break;
+    default: return @"Unspecified"; break;
+  }
+}
+
 @end
