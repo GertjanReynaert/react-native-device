@@ -1,6 +1,7 @@
 #import "DeviceUtil.h"
 #import "RCTBridge.h"
 #import "RCTUtils.h"
+#import "RCTEventDispatcher.h"
 
 @implementation DeviceUtil
 
@@ -81,7 +82,7 @@ RCT_EXPORT_METHOD(getBatteryLevel: (RCTResponseSenderBlock)callback) {
 RCT_EXPORT_METHOD(getBatteryState: (RCTResponseSenderBlock)callback) {
   callback(@[self.batteryState]);
 }
-
+     
 - (NSString *)batteryState {
   UIDevice *device = [UIDevice currentDevice];
 
@@ -152,66 +153,23 @@ RCT_EXPORT_METHOD(getProximityState: (RCTResponseSenderBlock)callback) {
   return device.proximityState;
 }
 
-RCTResponseSenderBlock orientationChangedCallback;
-RCTResponseSenderBlock batteryChangedCallback;
-RCTResponseSenderBlock proximityChangedCallback;
-
-//OrientationChange
-RCT_EXPORT_METHOD(watchOrientationChange: (RCTResponseSenderBlock)callback) {
-  orientationChangedCallback = callback;
-
-  [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
-}
-
 - (void)orientationChanged:(NSNotification *)notification
 {
-  orientationChangedCallback(@[self.orientation]);
-}
-
-RCT_EXPORT_METHOD(stopWatchingOrientationChange) {
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
-}
-
-//BatterChange
-RCT_EXPORT_METHOD(watchBatteryChange: (RCTResponseSenderBlock)callback) {
-  batteryChangedCallback = callback;
-
-  UIDevice *device = [UIDevice currentDevice];
-  device.batteryMonitoringEnabled = YES;
-
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(batteryChanged:) name:UIDeviceBatteryLevelDidChangeNotification object:device];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(batteryChanged:) name:UIDeviceBatteryStateDidChangeNotification object:device];
+  [self.bridge.eventDispatcher sendAppEventWithName:@"orientationChanged"
+                                               body:@{@"orientation": self.orientation}];
 }
 
 - (void)batteryChanged:(NSNotification *)notification
 {
-  batteryChangedCallback(@[[NSNumber numberWithFloat:self.batteryLevel], self.batteryState]);
-}
-
-RCT_EXPORT_METHOD(stopWatchingBatteryChange) {
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceBatteryLevelDidChangeNotification object:nil];
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceBatteryStateDidChangeNotification object:nil];
-}
-
-//ProximityChange
-RCT_EXPORT_METHOD(watchProximityChange: (RCTResponseSenderBlock)callback) {
-  proximityChangedCallback = callback;
-
-  UIDevice *device = [UIDevice currentDevice];
-  device.proximityMonitoringEnabled = YES;
-
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(proximityChanged:) name:UIDeviceProximityStateDidChangeNotification object:device];
+  [self.bridge.eventDispatcher sendAppEventWithName:@"batteryChanged"
+                                               body:@{@"batteryState": self.batteryState,
+                                                      @"batteryLevel":[NSNumber numberWithFloat: self.batteryLevel]
+                                                      }];
 }
 
 - (void)proximityChanged:(NSNotification *)notification
 {
-  proximityChangedCallback(@[[NSNumber numberWithBool: self.proximityState]]);
+  [self.bridge.eventDispatcher sendAppEventWithName:@"proximityStateChanged"
+                                               body:@{@"proximityState": [NSNumber numberWithBool: self.proximityState]}];
 }
-
-RCT_EXPORT_METHOD(stopWatchingProximityChange) {
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceProximityStateDidChangeNotification object:nil];
-}
-
 @end

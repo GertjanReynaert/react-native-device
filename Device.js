@@ -49,27 +49,36 @@ class Device {
   }
 
   watchOrientationChange(callback) {
-    DeviceUtil.watchOrientationChange(callback);
+    this._orientationSubscription = DeviceUtil.addListener(
+      'orientationChanged',
+      callback
+    );
   }
 
   watchBatteryChange(callback) {
-    DeviceUtil.watchBatteryChange(callback);
+    this._batterySubscription = DeviceUtil.addListener(
+      'batteryChanged',
+      callback
+    );
   }
 
   watchProximityChange(callback) {
-    DeviceUtil.watchProximityChange(callback);
+    this._proximityStateSubscription = DeviceUtil.addListener(
+      'proximityStateChanged',
+      callback
+    );
   }
 
-  stopWatchingOrientationChange(callback) {
-    DeviceUtil.stopWatchingOrientationChange(callback);
+  stopWatchingOrientationChange() {
+    this._orientationSubscription.remove();
   }
 
   stopWatchingBatteryChange(callback) {
-    DeviceUtil.stopWatchingBatteryChange(callback);
+    this._batterySubscription.remove();
   }
 
   stopWatchingProximityChange(callback) {
-    DeviceUtil.stopWatchingChange(callback);
+    this._proximityStateSubscription.remove();
   }
 }
 
