@@ -1,4 +1,5 @@
-var { NativeModules, Dimensions } = require('react-native');
+var { NativeModules, NativeAppEventEmitter, Dimensions } = require('react-native');
+
 var DeviceUtil = NativeModules.DeviceUtil;
 
 class Device {
@@ -49,21 +50,28 @@ class Device {
   }
 
   watchOrientationChange(callback) {
-    this._orientationSubscription = DeviceUtil.addListener(
+    this._orientationSubscription = NativeAppEventEmitter.addListener(
       'orientationChanged',
       callback
     );
   }
 
-  watchBatteryChange(callback) {
-    this._batterySubscription = DeviceUtil.addListener(
-      'batteryChanged',
+  watchBatteryStateChange(callback) {
+    this._batteryStateSubscription = NativeAppEventEmitter.addListener(
+      'batteryStateChanged',
+      callback
+    );
+  }
+
+  watchBatteryLevelChange(callback) {
+    this._batteryLevelSubscription = NativeAppEventEmitter.addListener(
+      'batteryLevelChanged',
       callback
     );
   }
 
   watchProximityChange(callback) {
-    this._proximityStateSubscription = DeviceUtil.addListener(
+    this._proximityStateSubscription = NativeAppEventEmitter.addListener(
       'proximityStateChanged',
       callback
     );
@@ -73,8 +81,12 @@ class Device {
     this._orientationSubscription.remove();
   }
 
-  stopWatchingBatteryChange(callback) {
-    this._batterySubscription.remove();
+  stopWatchingBatteryStateChange(callback) {
+    this._batteryStateSubscription.remove();
+  }
+
+  stopWatchingBatteryLevelChange(callback) {
+    this._batteryLevelSubscription.remove();
   }
 
   stopWatchingProximityChange(callback) {

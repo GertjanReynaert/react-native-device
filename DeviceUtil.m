@@ -4,187 +4,132 @@
 #import "RCTUtils.h"
 #import "RCTConvert.h"
 
+@implementation RCTConvert (DeviceUtil)
+RCT_ENUM_CONVERTER(UIDeviceOrientation, (@{
+                                           @"FaceDown": @(UIDeviceOrientationFaceDown),
+                                           @"FaceUp": @(UIDeviceOrientationFaceUp),
+                                           @"LandscapeLeft": @(UIDeviceOrientationLandscapeLeft),
+                                           @"LandscapeRight": @(UIDeviceOrientationLandscapeRight),
+                                           @"Portrait": @(UIDeviceOrientationPortrait),
+                                           @"PortraitUpsideDown": @(UIDeviceOrientationPortraitUpsideDown),
+                                           @"Unknown": @(UIDeviceOrientationUnknown),
+                                           }), UIDeviceOrientationUnknown, integerValue);
+
+RCT_ENUM_CONVERTER(UIDeviceBatteryState, (@{
+                                            @"Charging": @(UIDeviceBatteryStateCharging),
+                                            @"Full": @(UIDeviceBatteryStateFull),
+                                            @"Unplugged": @(UIDeviceBatteryStateUnplugged),
+                                            @"Unknown": @(UIDeviceBatteryStateUnknown),
+                                            }), UIDeviceBatteryStateUnknown, integerValue)
+
+RCT_ENUM_CONVERTER(UIUserInterfaceIdiom, (@{
+                                            @"Pad": @(UIUserInterfaceIdiomPad),
+                                            @"Phone": @(UIUserInterfaceIdiomPhone),
+                                            @"Unspecified": @(UIUserInterfaceIdiomUnspecified),
+                                            }), UIUserInterfaceIdiomUnspecified, integerValue);
+@end
+
 @implementation DeviceUtil
 
 RCT_EXPORT_MODULE();
 
 @synthesize bridge = _bridge;
 
+- (instancetype)init
+{
+  if (self = [super init]) {
+    UIDevice *device = [UIDevice currentDevice];
+    device.batteryMonitoringEnabled = YES;
+    device.proximityMonitoringEnabled = YES;
+    [device beginGeneratingDeviceOrientationNotifications];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(batteryLevelChanged:) name:UIDeviceBatteryLevelDidChangeNotification object:device];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(batteryStateChanged:) name:UIDeviceBatteryStateDidChangeNotification object:device];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(proximityChanged:) name:UIDeviceProximityStateDidChangeNotification object:device];
+  }
+  
+  return self;
+}
+
+- (void)dealloc
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (NSDictionary *)constantsToExport {
   UIDevice *device = [UIDevice currentDevice];
-
-  NSString *model = device.model;
-  NSString *name = device.name;
-  NSString *systemName = device.systemName;
-  NSString *systemVersion = device.systemVersion;
-  NSString *localizedModel = device.localizedModel;
-  bool multitaskingSupported = device.multitaskingSupported;
-  NSString *userInterfaceIdiom = self.userInterfaceIdiom;
-  NSString *identifierForVendor = device.identifierForVendor.UUIDString;
-
-  NSString *initialOrientation = self.orientation;
-  float initialBatteryLevel = self.batteryLevel;
-  NSString *initialBatteryState = self.batteryState;
-  bool initialProximityState = self.proximityState;
-
-  bool generatesDeviceOrientationNotifications = device.generatesDeviceOrientationNotifications;
-  bool batteryMonitoringEnabled = device.batteryMonitoringEnabled;
-  bool proximityMonitoringEnabled = device.proximityMonitoringEnabled;
-
+  
   return @{
-           @"model" : (model),
-           @"name" : (name),
-           @"systemName" : (systemName),
-           @"systemVersion" : (systemVersion),
-           @"localizedModel" : (localizedModel),
-           @"multitaskingSupported" : ([NSNumber numberWithBool:multitaskingSupported]),
-           @"userInterfaceIdiom" : (userInterfaceIdiom),
-           @"identifierForVendor" : (identifierForVendor),
+           @"model" : (device.model),
+           @"name" : (device.name),
+           @"systemName" : (device.systemName),
+           @"systemVersion" : (device.systemVersion),
+           @"localizedModel" : (device.localizedModel),
+           @"multitaskingSupported" : ([NSNumber numberWithBool:device.multitaskingSupported]),
+           @"userInterfaceIdiom" : @(device.userInterfaceIdiom),
+           @"identifierForVendor" : (device.identifierForVendor.UUIDString),
 
-           @"initialOrientation" : (initialOrientation),
-           @"initialBatteryLevel" : ([NSNumber numberWithFloat:initialBatteryLevel]),
-           @"initialBatteryState" : (initialBatteryState),
-           @"initialProximityState" : ([NSNumber numberWithBool:initialProximityState]),
+           @"initialOrientation" : @(device.orientation),
+           @"initialBatteryLevel" : ([NSNumber numberWithFloat:device.batteryLevel]),
+           @"initialBatteryState" : @(device.batteryState),
+           @"initialProximityState" : ([NSNumber numberWithBool:device.proximityState]),
 
-           @"generatesDeviceOrientationNotifications" : ([NSNumber numberWithBool:generatesDeviceOrientationNotifications]),
-           @"batteryMonitoringEnabled" : ([NSNumber numberWithBool:batteryMonitoringEnabled]),
-           @"proximityMonitoringEnabled" : ([NSNumber numberWithBool:proximityMonitoringEnabled]),
+           @"generatesDeviceOrientationNotifications" : ([NSNumber numberWithBool:device.generatesDeviceOrientationNotifications]),
+           @"batteryMonitoringEnabled" : ([NSNumber numberWithBool:device.batteryMonitoringEnabled]),
+           @"proximityMonitoringEnabled" : ([NSNumber numberWithBool:device.proximityMonitoringEnabled]),
            };
 }
 
-- (NSString *)userInterfaceIdiom {
-  UIDevice *device = [UIDevice currentDevice];
-
-  switch (device.userInterfaceIdiom) {
-    case UIUserInterfaceIdiomPad:
-      return @"Pad";
-      break;
-
-    case UIUserInterfaceIdiomPhone:
-      return @"Phone";
-      break;
-
-    default:
-      return @"Unspecified";
-      break;
-  }
-}
+// Getters
 
 RCT_EXPORT_METHOD(getBatteryLevel: (RCTResponseSenderBlock)callback) {
-  callback(@[[NSNumber numberWithFloat:self.batteryLevel]]);
-}
-
-- (float)batteryLevel {
   UIDevice *device = [UIDevice currentDevice];
-
-  return device.batteryLevel;
+  callback(@[[NSNumber numberWithFloat:device.batteryLevel]]);
 }
 
 RCT_EXPORT_METHOD(getBatteryState: (RCTResponseSenderBlock)callback) {
-  callback(@[self.batteryState]);
-}
-     
-- (NSString *)batteryState {
   UIDevice *device = [UIDevice currentDevice];
-
-  switch (device.batteryState) {
-    case UIDeviceBatteryStateCharging:
-      return @"Charging";
-      break;
-
-    case UIDeviceBatteryStateFull:
-      return @"Full";
-      break;
-
-    case UIDeviceBatteryStateUnplugged:
-      return @"Unplugged";
-      break;
-
-    default:
-      return @"Unknown";
-      break;
-  }
+  callback(@[@(device.batteryState)]);
 }
 
 RCT_EXPORT_METHOD(getOrientation: (RCTResponseSenderBlock)callback) {
-  callback(@[self.orientation]);
-}
-
-- (NSString *)orientation {
   UIDevice *device = [UIDevice currentDevice];
-
-  switch (device.orientation) {
-    case UIDeviceOrientationFaceDown:
-      return @"FaceDown";
-      break;
-
-    case UIDeviceOrientationFaceUp:
-      return @"FaceUp";
-      break;
-
-    case UIDeviceOrientationLandscapeLeft:
-      return @"LandscapeLeft";
-      break;
-
-    case UIDeviceOrientationLandscapeRight:
-      return @"LandscapeRight";
-      break;
-
-    case UIDeviceOrientationPortrait:
-      return @"Portrait";
-      break;
-
-    case UIDeviceOrientationPortraitUpsideDown:
-      return @"UpsideDown";
-      break;
-
-    default:
-      return @"Unknown";
-      break;
-  }
+  callback(@[@(device.orientation)]);
 }
 
 RCT_EXPORT_METHOD(getProximityState: (RCTResponseSenderBlock)callback) {
-  callback(@[[NSNumber numberWithBool:self.proximityState]]);
-}
-
-- (bool)proximityState {
   UIDevice *device = [UIDevice currentDevice];
-
-  return device.proximityState;
+  callback(@[[NSNumber numberWithBool:device.proximityState]]);
 }
 
-// Set event listeners in constructor
+// Callbacks for event listeners
 
 - (void)orientationChanged:(NSNotification *)notification
 {
+  UIDevice *device = [UIDevice currentDevice];
   [self.bridge.eventDispatcher sendAppEventWithName:@"orientationChanged"
-                                               body:@{@"orientation": self.orientation}];
+                                               body:@{@"orientation": @(device.orientation)}];
 }
 
-- (void)batteryChanged:(NSNotification *)notification
+- (void)batteryLevelChanged:(NSNotification *)notification
 {
-  [self.bridge.eventDispatcher sendAppEventWithName:@"batteryChanged"
-                                               body:@{@"batteryState": self.batteryState,
-                                                      @"batteryLevel":[NSNumber numberWithFloat: self.batteryLevel]
-                                                      }];
+  UIDevice *device = [UIDevice currentDevice];
+  [self.bridge.eventDispatcher sendAppEventWithName:@"batteryLevelChanged"
+                                               body:@{@"batteryLevel":[NSNumber numberWithFloat: device.batteryLevel]}];
+}
+
+- (void)batteryStateChanged:(NSNotification *)notification
+{
+  UIDevice *device = [UIDevice currentDevice];
+  [self.bridge.eventDispatcher sendAppEventWithName:@"batteryStateChanged"
+                                               body:@{@"batteryState": @(device.batteryState)}];
 }
 
 - (void)proximityChanged:(NSNotification *)notification
 {
-  [self.bridge.eventDispatcher sendAppEventWithName:@"proximityStateChanged"
-                                               body:@{@"proximityState": [NSNumber numberWithBool: self.proximityState]}];
-}
-
-RCT_EXPORT_METHOD(setup) {
   UIDevice *device = [UIDevice currentDevice];
-  device.batteryMonitoringEnabled = YES;
-  device.proximityMonitoringEnabled = YES;
-  [device beginGeneratingDeviceOrientationNotifications];
-  
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(batteryChanged:) name:UIDeviceBatteryLevelDidChangeNotification object:device];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(batteryChanged:) name:UIDeviceBatteryStateDidChangeNotification object:device];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(proximityChanged:) name:UIDeviceProximityStateDidChangeNotification object:device];
+  [self.bridge.eventDispatcher sendAppEventWithName:@"proximityStateChanged"
+                                               body:@{@"proximityState": [NSNumber numberWithBool: device.proximityState]}];
 }
 @end
