@@ -4,10 +4,9 @@ var DeviceUtil = NativeModules.DeviceUtil;
 var Dimensions = require('Dimensions');
 
 class Device {
-
   constructor() {
-    this.width = Dimensions.get("window").width;
-    this.height = Dimensions.get("window").height;
+    this.width = Dimensions.get('window').width;
+    this.height = Dimensions.get('window').height;
     this.model = DeviceUtil.model;
     this.deviceName = DeviceUtil.name;
     this.systemName = DeviceUtil.systemName;
@@ -15,17 +14,12 @@ class Device {
   }
 
   isIpad() {
-  	if (this.model.indexOf("iPad") >= 0) {
-  		return true;
-  	}
+    return this.model.indexOf('iPad') >= 0;
   }
 
   isIphone() {
-  	if (this.model.indexOf("iPhone") >= 0) {
-  		return true;
-  	}
+    return this.model.indexOf('iPhone') >= 0;
   }
-  
 }
 
 module.exports = new Device();
