@@ -1,8 +1,8 @@
 # React Native Device
 
-A wrapper for the native [UIDevice](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIDevice_Class/index.html#//apple_ref/occ/cl/UIDevice) class allowing you to access device properties and screen dimensions. **Currently only for React Native iOS, [Android support](https://github.com/GertjanReynaert/react-native-device/issues/16) in progress.**
+A wrapper for the native [iOS UIDevice](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIDevice_Class/index.html#//apple_ref/occ/cl/UIDevice) & [Android Build](http://developer.android.com/reference/android/os/Build.html) class allowing you to access device properties and screen dimensions. **Currently only for React Native iOS, [Android support](https://github.com/GertjanReynaert/react-native-device/issues/16) in progress.**
 
-## Installation
+## Installation (iOS)
 
 First install the package to your project from NPM...
 
