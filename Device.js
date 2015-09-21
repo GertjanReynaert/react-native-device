@@ -1,9 +1,4 @@
-var React = require('react-native'),
-    {
-      NativeModules, 
-      Dimensions
-    } = React;
-
+var { NativeModules, Dimensions } = require('react-native');
 var DeviceUtil = NativeModules.DeviceUtil;
 
 class Device {
