@@ -1,6 +1,6 @@
 {
   "name": "react-native-device",
-  "version": "2.0.0",
+  "version": "2.0.0-beta1",
   "description": "UIDevice wrapper for React Native",
   "main": "Device.js",
   "scripts": {
