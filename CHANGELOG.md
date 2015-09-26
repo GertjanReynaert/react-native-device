@@ -1,3 +1,9 @@
+1.0.1
+-----
+
+Fix incorrect import of the Dimensions module [#20](https://github.com/GertjanReynaert/react-native-device/pull/20)
+Thx @RWOverdijk for this fix
+
 1.0.0
 -----
 
