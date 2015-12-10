@@ -9,6 +9,7 @@ class Device {
     this.deviceName = DeviceUtil.name;
     this.systemName = DeviceUtil.systemName;
     this.systemVersion = DeviceUtil.systemVersion;
+    this.deviceVersion = DeviceUtil.deviceVersion;
   }
 
   isIpad() {
