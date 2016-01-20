@@ -36,7 +36,7 @@ The device model is of type iPhone
 Device.model
 ```
 
-The device model, such as `iPhone 5` or `iPad Air` - [All model options](https://github.com/InderKumarRathore/DeviceUtil/blob/master/DeviceUtil.m)
+The device model, such as `iPhone 5` or `iPad Air` - [All model options](https://github.com/InderKumarRathore/DeviceUtil/blob/master/DeviceUtil.m#L64-L126)
 
 ```javascript
 Device.deviceName
