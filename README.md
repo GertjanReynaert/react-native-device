@@ -16,7 +16,27 @@ Then within the package folder just add both the `.h` and `.m` classes to your p
 
 <img src="http://i.imgur.com/GZeVPPd.png" width="400">
 
-## Methods
+## Example Usage
+
+```javascript
+'use strict';
+
+var Device = require('react-native-device');
+
+var ExampleApp = React.createClass({
+  render: function() {
+    if (Device.isIpad()) {
+      // return iPad layout
+    } else {
+      // return iPhone layout
+    }
+  }
+});
+```
+
+## API
+
+### Methods
 
 ```javascript
 Device.isIpad()
@@ -28,15 +48,24 @@ The device model is of type iPad
 Device.isIphone()
 ```
 
-The device model is of type iPhone
+The device model is of type iPhone or iPod touch
 
-## Properties
+### Properties
 
+Full documentation on the native properties: [Apple documentation](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIDevice_Class/index.html)
+
+#### Device and Operating System
 ```javascript
 Device.model
 ```
 
 The device model, such as `iPhone 5` or `iPad Air` - [All model options](https://github.com/InderKumarRathore/DeviceUtil/blob/master/DeviceUtil.m#L64-L126)
+
+```javascript
+Device.localizedModel
+```
+
+Localized verion of `Device.model`
 
 ```javascript
 Device.deviceName
@@ -56,20 +85,88 @@ Device.systemVersion
 
 The device OS version, such as `8.4`
 
-## Example
+```javascript
+Device.identifierForVendor
+```
+
+Device unique id (UUID)
 
 ```javascript
-'use strict';
-
-var Device = require('react-native-device');
-
-var ExampleApp = React.createClass({
-  render: function() {
-    if (Device.isIpad()) {
-      // return iPad layout
-    } else {
-      // return iPhone layout
-    }
-  }
-});
+Device.multitaskingSupported
 ```
+
+Whether the device supports multitasking or not
+
+```javascript
+Device.userInterfaceIdiom
+```
+
+What type of device it is. Possible values:
+
+- Phone (includes iPod touch)
+- Pad
+- Unknown
+
+#### Orientation
+
+```javascript
+Device.initialOrientation
+```
+
+Orientation of the device when the app is just started.
+Possible values:
+
+- FaceDown
+- FaceUp
+- LandscapeLeft
+- LandscapeRight
+- Portrait
+- UpsideDown
+- Unknown
+
+```javascript
+Device.generatesDeviceOrientationNotifications
+```
+
+Whether the device can change orientation or not. (Orientation lock)
+
+#### Battery
+
+```javascript
+Device.initialBatteryLevel
+```
+
+Level of the battery when the app is just started.
+Values between 0.0 and 1.0, if unknown -1.0
+
+```javascript
+Device.initialBatteryState
+```
+
+State of the battery when the app just started.
+Possible values:
+
+- Charging
+- Full
+- Unplugged
+- Unknown
+
+```javascript
+Device.batteryMonitoringEnabled
+```
+
+Whether the app is monitoring the battery or not.
+
+#### Proximity
+
+```javascript
+Device.initialProximityState
+```
+
+Whether the device is close to the user (true) or not (false)
+
+```javascript
+Device.proximityMonitoringEnabled
+```
+
+Whether the app is monitoring the proximity or not
