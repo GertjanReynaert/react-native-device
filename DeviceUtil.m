@@ -1,6 +1,7 @@
 #import "DeviceUtil.h"
 #import "RCTBridge.h"
 #import "RCTUtils.h"
+#import <sys/utsname.h>
 
 @implementation DeviceUtil
 
@@ -14,11 +15,16 @@ RCT_EXPORT_MODULE();
     NSString *systemName = [[UIDevice currentDevice] systemName];
     NSString *systemVersion = [[UIDevice currentDevice] systemVersion];
 
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    NSString *deviceVersion = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+
     return @{
              @"model" : (model),
              @"name" : (name),
              @"systemName" : (systemName),
-             @"systemVersion" : (systemVersion)
+             @"systemVersion" : (systemVersion),
+             @"deviceVersion" : (deviceVersion)
              };
 }
 
