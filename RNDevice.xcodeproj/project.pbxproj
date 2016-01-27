@@ -1,0 +1,252 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DCCCCE9B1C5901AE0054BD4A /* DeviceUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = DCCCCE991C5901AE0054BD4A /* DeviceUtil.h */; };
+		DCCCCE9D1C5901D20054BD4A /* DeviceUtil.h in Sources */ = {isa = PBXBuildFile; fileRef = DCCCCE991C5901AE0054BD4A /* DeviceUtil.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DC7CE62C1C58D3A300F6A042 /* libRNDevice.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libRNDevice.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCCCCE991C5901AE0054BD4A /* DeviceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceUtil.h; path = "DeviceUtil.h"; sourceTree = "<group>"; };
+		DCCCCE9A1C5901AE0054BD4A /* DeviceUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceUtil.m; path = "DeviceUtil.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DC7CE6291C58D3A300F6A042 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DC7CE6201C58D28B00F6A042 = {
+			isa = PBXGroup;
+			children = (
+				DCCCCE941C59017D0054BD4A /* RNDevice */,
+				DC7CE62D1C58D3A300F6A042 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DC7CE62D1C58D3A300F6A042 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC7CE62C1C58D3A300F6A042 /* libRNDevice.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DCCCCE941C59017D0054BD4A /* RNDevice */ = {
+			isa = PBXGroup;
+			children = (
+				DCCCCE991C5901AE0054BD4A /* DeviceUtil.h */,
+				DCCCCE9A1C5901AE0054BD4A /* DeviceUtil.m */,
+			);
+			name = RNDevice;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		DC7CE62A1C58D3A300F6A042 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCCCCE9B1C5901AE0054BD4A /* DeviceUtil.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		DC7CE62B1C58D3A300F6A042 /* RNDevice */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC7CE62E1C58D3A300F6A042 /* Build configuration list for PBXNativeTarget "RNDevice" */;
+			buildPhases = (
+				DC7CE6281C58D3A300F6A042 /* Sources */,
+				DC7CE6291C58D3A300F6A042 /* Frameworks */,
+				DC7CE62A1C58D3A300F6A042 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RNDevice;
+			productName = RNDevice;
+			productReference = DC7CE62C1C58D3A300F6A042 /* libRNDevice.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DC7CE6211C58D28B00F6A042 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				TargetAttributes = {
+					DC7CE62B1C58D3A300F6A042 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = DC7CE6241C58D28B00F6A042 /* Build configuration list for PBXProject "RNDevice" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DC7CE6201C58D28B00F6A042;
+			productRefGroup = DC7CE62D1C58D3A300F6A042 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DC7CE62B1C58D3A300F6A042 /* RNDevice */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DC7CE6281C58D3A300F6A042 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCCCCE9D1C5901D20054BD4A /* DeviceUtil.h in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		DC7CE6251C58D28B00F6A042 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		DC7CE6261C58D28B00F6A042 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		DC7CE62F1C58D3A300F6A042 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos9.2;
+			};
+			name = Debug;
+		};
+		DC7CE6301C58D3A300F6A042 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos9.2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DC7CE6241C58D28B00F6A042 /* Build configuration list for PBXProject "RNDevice" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC7CE6251C58D28B00F6A042 /* Debug */,
+				DC7CE6261C58D28B00F6A042 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC7CE62E1C58D3A300F6A042 /* Build configuration list for PBXNativeTarget "RNDevice" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC7CE62F1C58D3A300F6A042 /* Debug */,
+				DC7CE6301C58D3A300F6A042 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DC7CE6211C58D28B00F6A042 /* Project object */;
+}
