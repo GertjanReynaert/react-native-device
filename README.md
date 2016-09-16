@@ -1,4 +1,6 @@
-# React Native Device
+# React Native Device [deprecated]
+
+This project is no longer maintained. You can still use it as is, but bugs will no longer be fixed, features will no longer be implemented. An alternative to this package might be [react-native-device-info](https://github.com/rebeccahughes/react-native-device-info)
 
 ![NPM Stats](https://nodei.co/npm/react-native-device.png?downloads=true)
 
